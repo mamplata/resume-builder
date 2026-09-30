@@ -151,9 +151,9 @@ function bullets(value) {
             </div>
             <div>
               <section v-if="resume.education.length"><h3>Education</h3><article v-for="item in resume.education" :key="item"><h4>{{ item.degree }}</h4><p>{{ item.school }} <span v-if="item.year">({{ item.year }})</span></p></article></section>
-              <section v-if="resume.certifications.length"><h3>Certifications</h3><article v-for="item in resume.certifications" :key="item"><h4>{{ item.name }} <a v-if="item.link" :href="item.link" target="_blank" rel="noopener noreferrer">{{ item.link }}</a></h4><p>{{ item.issuer }} <span v-if="item.year">({{ item.year }})</span></p></article></section>
+              <section v-if="resume.certifications.length"><h3>Certifications</h3><article v-for="item in resume.certifications" :key="item"><h4>{{ item.name }} <a v-if="item.link" :href="item.link" target="_blank" rel="noopener noreferrer">View credential</a></h4><p>{{ item.issuer }} <span v-if="item.year">({{ item.year }})</span></p></article></section>
               <section v-if="resume.skills.length"><h3>Skills</h3><p>{{ resume.skills.map(item => item.name).filter(Boolean).join(' • ') }}</p></section>
-              <section v-if="resume.projects.length" class="projects"><h3>Projects</h3><article v-for="item in resume.projects" :key="item"><h4>{{ item.name }} <a v-if="item.link" :href="item.link" target="_blank" rel="noopener noreferrer">{{ item.link }}</a></h4><p>{{ item.description }}</p></article></section>
+              <section v-if="resume.projects.length" class="projects"><h3>Projects</h3><article v-for="item in resume.projects" :key="item"><h4>{{ item.name }} <a v-if="item.link" :href="item.link" target="_blank" rel="noopener noreferrer">View project</a></h4><p>{{ item.description }}</p></article></section>
             </div>
           </div>
         </template>
