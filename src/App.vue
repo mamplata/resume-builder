@@ -80,7 +80,7 @@ function bullets(value) {
           <label>Phone <input v-model="resume.personal.phone" placeholder="+1 555 123 4567" /></label>
         </div>
           <label>Location <input v-model="resume.personal.location" placeholder="Manila, Philippines" /></label>
-          <div class="grid"><label>LinkedIn <input v-model="resume.personal.linkedin" type="url" placeholder="https://linkedin.com/in/username" /></label><label>Portfolio <input v-model="resume.personal.portfolio" type="url" placeholder="https://yourportfolio.com" /></label></div>
+          <div class="grid"><label>LinkedIn <input v-model="resume.personal.linkedin" type="url" placeholder="https://linkedin.com/in/username" /></label><label>GitHub <input v-model="resume.personal.portfolio" type="url" placeholder="https://github.com/username" /></label></div>
         <label>Summary <textarea v-model="resume.personal.summary" rows="4" placeholder="A short professional introduction..."></textarea></label>
       </fieldset>
 
@@ -142,7 +142,7 @@ function bullets(value) {
           <header class="resume-header">
             <h2>{{ resume.personal.name || 'Your Name' }}</h2>
             <p v-if="resume.personal.title">{{ resume.personal.title }}</p>
-            <div class="contact"><span>{{ [resume.personal.email, resume.personal.phone, resume.personal.location].filter(Boolean).join(' • ') }}</span><span v-if="resume.personal.linkedin || resume.personal.portfolio"> • </span><a v-if="resume.personal.linkedin" :href="resume.personal.linkedin" target="_blank" rel="noopener noreferrer">LinkedIn</a><span v-if="resume.personal.linkedin && resume.personal.portfolio"> • </span><a v-if="resume.personal.portfolio" :href="resume.personal.portfolio" target="_blank" rel="noopener noreferrer">Portfolio</a></div>
+            <div class="contact"><span>{{ [resume.personal.email, resume.personal.phone, resume.personal.location].filter(Boolean).join(' • ') }}</span><span v-if="resume.personal.linkedin || resume.personal.portfolio"> • </span><a v-if="resume.personal.linkedin" :href="resume.personal.linkedin" target="_blank" rel="noopener noreferrer">LinkedIn</a><span v-if="resume.personal.linkedin && resume.personal.portfolio"> • </span><a v-if="resume.personal.portfolio" :href="resume.personal.portfolio" target="_blank" rel="noopener noreferrer">GitHub</a></div>
           </header>
           <div class="resume-columns">
             <div>
