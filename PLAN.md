@@ -29,7 +29,9 @@ Build a simple resume builder with Vue 3 that lets users enter resume details, p
   },
   experience: [],
   education: [],
-  skills: [],
+  skills: [
+    { category: "Backend", items: "PHP, Laravel, Symfony, REST APIs, Node.js" }
+  ],
   projects: []
 }
 ```
@@ -66,7 +68,8 @@ src/
 - Add personal information fields.
 - Add repeatable work experience entries.
 - Add repeatable education entries.
-- Add skills and projects.
+- Add grouped skills with a category and comma-separated skill items, instead of one field per skill.
+- Render grouped skills in the preview as `Category: skill, skill`.
 - Add remove actions for repeatable entries.
 
 ### 4. Build preview mode
@@ -76,6 +79,7 @@ src/
 - Keep the preview updated as the user edits the form.
 - Hide empty sections in the preview.
 - Use semantic HTML for headings, lists, and contact details.
+- Keep grouped skill categories readable in the preview and omit empty groups.
 
 ### 5. Add persistence and actions
 
@@ -84,6 +88,7 @@ src/
 - Do not add a backend, account, or remote data storage.
 - Add a clear-resume action with confirmation.
 - Add a print button using `window.print()`.
+- Preserve existing saved resumes when loading older flat `{ name }` skill entries by displaying them as uncategorized skills.
 
 ### 6. Add styling
 

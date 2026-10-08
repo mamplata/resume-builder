@@ -13,7 +13,10 @@ const emptyResume = () => ({
 const saved = localStorage.getItem('resume-builder')
 const stored = saved ? JSON.parse(saved) : {}
 const defaults = emptyResume()
-const resume = reactive({ ...defaults, ...stored, personal: { ...defaults.personal, ...(stored.personal || {}) } })
+const skills = (stored.skills || []).map(item => item.category !== undefined || item.items !== undefined
+  ? item
+  : { category: '', items: item.name || '' })
+const resume = reactive({ ...defaults, ...stored, skills, personal: { ...defaults.personal, ...(stored.personal || {}) } })
 const mode = ref('edit')
 const savedAt = ref('')
 
@@ -30,7 +33,7 @@ function add(section) {
     experience: { role: '', company: '', start: '', end: '', description: '' },
     education: { degree: '', school: '', year: '' },
     certifications: { name: '', issuer: '', year: '', link: '' },
-    skills: { name: '' },
+    skills: { category: '', items: '' },
     projects: { name: '', description: '', link: '' }
   }
   resume[section].push(values[section])
@@ -118,7 +121,10 @@ function bullets(value) {
 
       <fieldset>
         <legend>Skills</legend>
-        <div v-for="(item, index) in resume.skills" :key="item" class="inline-entry"><input v-model="item.name" placeholder="Vue.js" /><button class="remove" @click="resume.skills.splice(index, 1)">Remove</button></div>
+        <article v-for="(item, index) in resume.skills" :key="item" class="entry">
+          <div class="entry-title"><strong>Skill group {{ index + 1 }}</strong><button class="remove" @click="resume.skills.splice(index, 1)">Remove</button></div>
+          <div class="grid"><label>Category <input v-model="item.category" placeholder="Backend" /></label><label>Skills <input v-model="item.items" placeholder="PHP, Laravel, Symfony" /></label></div>
+        </article>
         <button class="add" @click="add('skills')">+ Add skill</button>
       </fieldset>
 
@@ -152,7 +158,7 @@ function bullets(value) {
             <div>
               <section v-if="resume.education.length"><h3>Education</h3><article v-for="item in resume.education" :key="item"><h4>{{ item.degree }}</h4><p>{{ item.school }} <span v-if="item.year">({{ item.year }})</span></p></article></section>
               <section v-if="resume.certifications.length"><h3>Certifications</h3><article v-for="item in resume.certifications" :key="item"><h4>{{ item.name }} <a v-if="item.link" :href="item.link" target="_blank" rel="noopener noreferrer">View credential</a></h4><p>{{ item.issuer }} <span v-if="item.year">({{ item.year }})</span></p></article></section>
-              <section v-if="resume.skills.length"><h3>Skills</h3><p>{{ resume.skills.map(item => item.name).filter(Boolean).join(' • ') }}</p></section>
+              <section v-if="resume.skills.length"><h3>Skills</h3><p v-for="item in resume.skills" :key="item"><strong v-if="item.category">{{ item.category }}:</strong><span v-if="item.category"> </span>{{ item.items }}</p></section>
               <section v-if="resume.projects.length" class="projects"><h3>Projects</h3><article v-for="item in resume.projects" :key="item"><h4>{{ item.name }} <a v-if="item.link" :href="item.link" target="_blank" rel="noopener noreferrer">View project</a></h4><p>{{ item.description }}</p></article></section>
             </div>
           </div>
